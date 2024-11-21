@@ -16,6 +16,10 @@ select = [
     # isort
     "I",
 ]
+ignore = [
+    # Line too long
+    "E501",
+]
 
 [tool.mypy]
 strict = true
