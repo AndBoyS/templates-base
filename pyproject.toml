@@ -44,6 +44,7 @@ ignore = [
     "E501",
     # open should be replaced by Path.open
     "PTH123",
+    "ISC001",
 ]
 
 [tool.mypy]
