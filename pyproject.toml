@@ -4,22 +4,21 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "AndBoyS", email = "andboyxd@gmail.com" }]
-requires-python = ">=3.11"
+requires-python = "~=3.11.0"
 
+[dependency-groups]
+dev = ["ruff>=0.13.2", "pyrefly>=1.0.0"]
 
 [build-system]
-requires = ["uv_build~=0.9.0"]
+requires = ["uv_build~=0.11.0"]
 build-backend = "uv_build"
-
-[tool.uv.build-backend]
-module-name = "src"
-module-root = ""
 
 [tool.ruff]
 line-length = 120
 
 [tool.ruff.lint]
 select = [
+  "ANN",
   "E",     # pycodestyle
   "F",     # Pyflakes
   "UP",    # pyupgrade
@@ -39,14 +38,30 @@ select = [
   "NPY",   # numpy
   "PERF",
   "FURB",
-  "A005",
 ]
 ignore = [
-  "E501",   # Line too long
+  "E501",    # Line too long
+  "PTH123",  # open should be replaced by Path.open
   "ISC001",
-  "PLR091", # Uncle Bob's BS
-  "PTH123", # open should be replaced by Path.open
+  "RET504",  # creating and returning variable
+  "F821",    # Not defined - use ty
+  "PLR091",  # Uncle Bob's BS
+  "ANN401",  # Allow Any
+  "PLW2901", # Changing loop var
 ]
 
-[dependency-groups]
-dev = ["ruff>=0.13.2", "ty>=0.0.13"]
+[tool.ruff.lint.flake8-annotations]
+mypy-init-return = true
+
+[tool.pyrefly]
+use-ignore-files = false
+enabled-ignores = ["type", "pyrefly", "ty"]
+output-format = "min-text"
+min-severity = "warn"
+
+[tool.pyrefly.errors]
+untyped-import = true
+open-unpacking = true
+not-required-key-access = true
+implicitly-defined-attribute = true
+implicit-any = true
